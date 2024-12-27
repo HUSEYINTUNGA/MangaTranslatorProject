@@ -1,0 +1,58 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Translator</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <script>
+        function previewImage(event) {
+            const output = document.getElementById('imagePreview');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.style.display = 'block';
+        }
+    </script>
+</head>
+<body>
+    <div class="navigation">
+        <a href="{% url 'about' %}" class="about-button">About Me</a>
+    </div>
+    <h1>Manga Translator</h1>
+    <form action="/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="image">Görsel Yükle:(Upload Image)</label>
+        <input type="file" id="image" name="image" accept="image/*" required onchange="previewImage(event)">
+
+        <img id="imagePreview" style="display:none; max-width: 100%; margin-top: 20px;" alt="Seçilen Görsel">
+
+        <label for="language">Çeviri Dili: (Translation Language)</label>
+        <select id="language" name="language" required>
+            <option value="tr">Türkçe / Turkish / トルコ語</option>
+            <option value="en">İngilizce / English / 英語</option>
+            <option value="ja">Japonca / Japanese / 日本語</option>
+        </select>
+
+        <button type="submit">Çevir</button>
+    </form>
+
+    {% if processed_image_url and original_image_url %}
+    <div class="result" style="margin-top: 30px;">
+        <h2>Sonuç:</h2>
+        <div style="display: flex; gap: 20px; justify-content: center;">
+            <div>
+                <h3>Orijinal Görsel</h3>
+                <img src="{{ original_image_url }}" alt="Orijinal Görsel" style="max-width: 300px;">
+            </div>
+            <div>
+                <h3>İşlenmiş Görsel</h3>
+                <img src="{{ processed_image_url }}" alt="İşlenmiş Görsel" style="max-width: 300px;">
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="{{ processed_image_url }}" download="processed_image.jpg">İşlenmiş Görseli İndir</a>
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,137 @@
+/* Genel stil ayarları */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form stili */
+form {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px 30px;
+    max-width: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="file"], select, button {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="file"]:hover, select:hover, button:hover {
+    border-color: #666;
+}
+
+button {
+    background-color: #5c67f2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: #4752d9;
+}
+
+#imagePreview {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+/* Sonuç alanı */
+.result {
+    margin-top: 40px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.result h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.result div {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.result img {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: contain;
+}
+
+.result a {
+    display: inline-block;
+    margin-top: 20px;
+    text-align: center;
+    background-color: #5c67f2;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.result a:hover {
+    background-color: #4752d9;
+}
+.navigation {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.about-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #35424a;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.about-button:hover {
+    background-color: #007bff;
+    transform: scale(1.05);
+}
