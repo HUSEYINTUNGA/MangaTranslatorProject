@@ -1,0 +1,140 @@
+Epoch 1:
+Precision: 0.3917
+Recall: 0.9054
+F1 Score: 0.5401
+Accuracy: 0.3817
+Average Loss: 0.3989
+
+Epoch 2:
+Precision: 0.6505
+Recall: 0.9261
+F1 Score: 0.7561
+Accuracy: 0.6284
+Average Loss: 0.2450
+
+Epoch 3:
+Precision: 0.6060
+Recall: 0.9417
+F1 Score: 0.7286
+Accuracy: 0.5901
+Average Loss: 0.2216
+
+Epoch 4:
+Precision: 0.7354
+Recall: 0.9242
+F1 Score: 0.8121
+Accuracy: 0.7077
+Average Loss: 0.1716
+
+Epoch 5:
+Precision: 0.7513
+Recall: 0.9317
+F1 Score: 0.8248
+Accuracy: 0.7221
+Average Loss: 0.1607
+
+Epoch 6:
+Precision: 0.7512
+Recall: 0.9301
+F1 Score: 0.8247
+Accuracy: 0.7245
+Average Loss: 0.1567
+
+Epoch 7:
+Precision: 0.7611
+Recall: 0.9347
+F1 Score: 0.8320
+Accuracy: 0.7326
+Average Loss: 0.1522
+
+Epoch 8:
+Precision: 0.7653
+Recall: 0.9343
+F1 Score: 0.8344
+Accuracy: 0.7367
+Average Loss: 0.1506
+
+Epoch 9:
+Precision: 0.7653
+Recall: 0.9334
+F1 Score: 0.8341
+Accuracy: 0.7362
+Average Loss: 0.1499
+
+Epoch 10:
+Precision: 0.7653
+Recall: 0.9334
+F1 Score: 0.8341
+Accuracy: 0.7362
+Average Loss: 0.1490
+
+Epoch 11:
+Precision: 0.7653
+Recall: 0.9334
+F1 Score: 0.8341
+Accuracy: 0.7362
+Average Loss: 0.1494
+
+Epoch 12:
+Precision: 0.7649
+Recall: 0.9334
+F1 Score: 0.8338
+Accuracy: 0.7358
+Average Loss: 0.1492
+
+Epoch 13:
+Precision: 0.7649
+Recall: 0.9334
+F1 Score: 0.8338
+Accuracy: 0.7358
+Average Loss: 0.1487
+
+Epoch 14:
+Precision: 0.7649
+Recall: 0.9334
+F1 Score: 0.8338
+Accuracy: 0.7358
+Average Loss: 0.1490
+
+Epoch 15:
+Precision: 0.7649
+Recall: 0.9334
+F1 Score: 0.8338
+Accuracy: 0.7358
+Average Loss: 0.1489
+
+Epoch 16:
+Precision: 0.7649
+Recall: 0.9334
+F1 Score: 0.8338
+Accuracy: 0.7358
+Average Loss: 0.1486
+
+Epoch 17:
+Precision: 0.7649
+Recall: 0.9334
+F1 Score: 0.8338
+Accuracy: 0.7358
+Average Loss: 0.1497
+
+Epoch 18:
+Precision: 0.7649
+Recall: 0.9334
+F1 Score: 0.8338
+Accuracy: 0.7358
+Average Loss: 0.1491
+
+Epoch 19:
+Precision: 0.7649
+Recall: 0.9334
+F1 Score: 0.8338
+Accuracy: 0.7358
+Average Loss: 0.1498
+
+Epoch 20:
+Precision: 0.7649
+Recall: 0.9334
+F1 Score: 0.8338
+Accuracy: 0.7358
+Average Loss: 0.1496
+
