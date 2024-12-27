@@ -24,7 +24,7 @@ OCR ile elde edilen metinler Google Translate API kullanılarak hedef dile çevr
 # Model Eğitimi
 
 ## Veri Seti
-Model, Kaggle'dan ([http://](https://www.kaggle.com/datasets/naufalahnaf17/manga-text-detection) adrsinden alınan görseller "Hüseyin TUNGA" tarafından etiketlenmiştir.
+Model, Kaggle'dan ([http://(https://www.kaggle.com/datasets/naufalahnaf17/manga-text-detection]) adrsinden alınan görseller "Hüseyin TUNGA" tarafından etiketlenmiştir.
 Model, bu manga görselleri üzerinde eğitildi. Veri seti şu özelliklere sahiptir:
   -Etiket Formatı: COCO JSON formatı,
   -İçerik: Manga görsellerindeki metin kutuları ve sınıf bilgileri.
