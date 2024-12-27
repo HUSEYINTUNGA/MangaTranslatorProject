@@ -200,7 +200,7 @@ def train_and_validate(model, train_loader, valid_loader, optimizer, lr_schedule
     Döndürür:
     - TP, FP, FN toplamları.
     """
-    output_dir = "C:/Users/husey/Desktop/Projects/Manga/Model_Metrics/"
+    output_dir = "MangaTranslatorApp/Model_Metrics/"
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
@@ -329,7 +329,7 @@ def run_training():
     - Test aşamasında final metrikler hesaplanır ve raporlanır.
     - Sonuçlar dosyaya kaydedilir.
     """
-    dataset_path = "C:/Users/husey/Desktop/Projects/Manga/TrainAndValidationDataset/"
+    dataset_path = "MangaTranslatorApp/TrainAndValidationDataset/"
 
 
     train_path = os.path.join(dataset_path, 'train/')
@@ -361,7 +361,7 @@ def run_training():
     print("Starting training and validation...")
     final_tp, final_fp, final_fn = train_and_validate(model, train_loader, valid_loader, optimizer, lr_scheduler, device)
 
-    validation_confusion_matrix_path = "C:/Users/husey/Desktop/Projects/Manga/Model_Metrics/validation_confusion_matrix.png"
+    validation_confusion_matrix_path = "MangaTranslatorApp/Model_Metrics/validation_confusion_matrix.png"
     plot_confusion_matrix(final_tp, final_fp, final_fn, save_path=validation_confusion_matrix_path)
     print(f"Validation Confusion Matrix saved to {validation_confusion_matrix_path}")
 
@@ -369,7 +369,7 @@ def run_training():
     test_tp, test_fp, test_fn = test_model(model, test_loader, device)
 
 
-    test_confusion_matrix_path = "C:/Users/husey/Desktop/Projects/Manga/Model_Metrics/test_confusion_matrix.png"
+    test_confusion_matrix_path = "MangaTranslatorApp/Model_Metrics/test_confusion_matrix.png"
     plot_confusion_matrix(test_tp, test_fp, test_fn, save_path=test_confusion_matrix_path)
     print(f"Test Confusion Matrix saved to {test_confusion_matrix_path}")
 

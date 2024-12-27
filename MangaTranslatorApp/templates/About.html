@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkımda</title>
+    <link rel="stylesheet" href="{% static 'css/aboutme.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-title">
+            <h1>Hakkımda</h1>
+            <p>Merhaba! Ben Hüseyin TUNGA. Veri bilimi ve yapay zeka konularında çalışan bir yazılım mühendisiyim. Bu sayfa, "Manga Translator" projemi detaylı bir şekilde açıklamak için hazırlandı. Projemde, yapay zeka tabanlı çeviri modellerini kullanarak görseller üzerinde metin tanıma ve çeviri işlemleri gerçekleştiriyorum.</p>
+        </div>
+    </header>
+
+    <section class="project-info">
+        <h2>Projem Hakkında</h2>
+        <p>"Manga Translator" projesi, manga görsellerindeki metinleri tanıyarak, kullanıcıların istedikleri dillere çevirmelerine olanak tanır. Bu proje, yapay zeka ve optik karakter tanıma (OCR) tekniklerini birleştirerek görseller üzerinde metin tespiti ve çeviri işlemleri gerçekleştirir.</p>
+        <p>Proje şu aşamalardan oluşmaktadır:</p>
+        <ol>
+            <li><strong>Metin Tespiti:</strong> Yüklenen görseller Faster R-CNN modeliyle işlenerek metin kutuları tespit edilir.</li>
+            <li><strong>Optik Karakter Tanıma:</strong> EasyOCR kütüphanesi, tespit edilen metinleri okuyarak dijital formata dönüştürür.</li>
+            <li><strong>Çeviri:</strong> Google Translate API'si, tanınan metinleri istenilen dile çevirir.</li>
+            <li><strong>Sonuç Görselleştirme:</strong> Çevrilen metinler orijinal görseldeki metinlerin yerine yazılır ve kullanıcıya sunulur.</li>
+        </ol>
+    </section>
+
+    <section class="model-info">
+        <h2>Model Bilgileri</h2>
+        <p>Projenin ana modeli, Faster R-CNN tabanlı bir mimariye sahiptir. ResNet50 modeli özellik çıkarıcı olarak kullanılmıştır. Model, etiketlenmiş manga görselleri üzerinde eğitilmiştir.</p>
+        <ul>
+            <li>Model: Faster R-CNN (ResNet50 tabanlı)</li>
+            <li>Veriseti: Kaggle'dan alınan ve elle etiketlenmiş manga görselleri</li>
+            <li>Eğitim Metrikleri: %73 doğruluk, %83 F1 skoru</li>
+        </ul>
+        <p>Model, yüksek doğruluk oranıyla görsellerdeki metin kutularını başarıyla tespit etmektedir.</p>
+    </section>
+
+    <section class="confusion-matrices">
+        <h2>Eğitim Sonuçları</h2>
+        <p>Eğitim sürecinde iki farklı confusion matrix görselleştirilmiştir. Bu görseller, modelin performansını değerlendirmek için kullanılmıştır. Doğrulama ve test süreçlerindeki metrikler aşağıda gösterilmiştir:</p>
+        <ul>
+            <li><strong>Precision:</strong> 0.7649</li>
+            <li><strong>Recall:</strong> 0.9334</li>
+            <li><strong>F1 Skoru:</strong> 0.8338</li>
+            <li><strong>Accuracy:</strong> 0.7358</li>
+        </ul>
+        <div style="display: flex; justify-content: center; gap: 20px;">
+            <img src="{% static 'img/validation_confusion_matrix.png' %}" alt="Doğrulama Confusion Matrix" style="max-width: 400px;">
+            <img src="{% static 'img/test_confusion_matrix.png' %}" alt="Test Confusion Matrix" style="max-width: 400px;">
+        </div>
+    </section>
+
+    <section class="usage-guide">
+        <h2>Kullanım Kılavuzu</h2>
+        <p>Manga Translator'ı kullanmak oldukça basittir. Aşağıdaki adımları izleyerek sistemi kolayca kullanabilirsiniz:</p>
+        <ol>
+            <li><strong>Görsel Yükleyin:</strong> Ana sayfada bulunan form üzerinden bir manga görseli seçin.</li>
+            <li><strong>Çeviri Dilini Seçin:</strong> Görseldeki metinleri çevirmek istediğiniz dili belirleyin.</li>
+            <li><strong>Çevir Butonuna Tıklayın:</strong> Sistem, yüklenen görseli işlemeye başlayacaktır.</li>
+            <li><strong>Sonuçları Görüntüleyin:</strong> İşlenmiş görsel orijinal görselle yan yana gösterilecektir. İşlenmiş görseli indirmeniz de mümkündür.</li>
+        </ol>
+    </section>
+
+    <section class="process-info">
+        <h2>Çeviri Butonuna Tıklandıktan Sonra Gerçekleşen İşlemler</h2>
+        <p>Çeviri işlemi sırasında sistem şu adımları takip eder:</p>
+        <ol>
+            <li><strong>Görsel ve Dil Bilgisi:</strong> Yüklenen görsel ve seçilen çeviri dili, Django'nun `HomePage` view fonksiyonu tarafından alınır.</li>
+            <li><strong>Metin Tespiti:</strong> Görsel, `train_model.py` dosyasında eğitilmiş ve `trained_manga_rccn.pth` olarak kaydedilmiş Faster R-CNN modeli kullanılarak işlenir. Bu işlem sırasında model, metin kutularını tespit eder ve kutu koordinatlarını içeren bir sözlük döndürür.</li>
+            <li><strong>Metinlerin İşlenmesi:</strong> `read_translate_draw.py` dosyasındaki `process_text` fonksiyonu çalıştırılır. Bu fonksiyon, tespit edilen metinleri okur, hedef dile çevirir ve görsel üzerinde çeviriyi uygular.</li>
+            <li><strong>Sonuçların Hazırlanması:</strong> İşlenmiş görsel bir dosya olarak kaydedilir ve URL'si HTML şablonuna gönderilir.</li>
+        </ol>
+        <p>Sonuç olarak, kullanıcı işlenmiş görseli orijinal görselle kıyaslayarak görüntüleyebilir ve indirebilir.</p>
+    </section>
+
+    <div class="box">
+        <img src="{% static 'img/HuseyinTUNGA.jpg' %}" alt="Hüseyin TUNGA">
+        <h1>Software Engineer</h1>
+        <h3>AI and Data Scientist</h3>
+        <ul>
+            <li><a href="https://github.com/HUSEYINTUNGA" target="_blank"><i class="fab fa-github"></i></a></li>
+            <li><a href="https://www.linkedin.com/in/hüseyin-tunga-248177252/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="https://www.instagram.com/huseyn_tng/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="mailto:tunga@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
+        </ul>
+        <p>Tüm hakları saklıdır &copy; 2025 Hüseyin TUNGA</p>
+    </div>
+
+    <footer>
+        <section class="resources">
+            <h2>Ek Kaynaklar</h2>
+            <p>Proje ile ilgili ek kaynaklara aşağıdaki bağlantılardan ulaşabilirsiniz:</p>
+            <ul>
+                <li><a href="https://www.kaggle.com/datasets/naufalahnaf17/manga-text-detection" target="_blank">Kaggle Veriseti</a></li>
+                <li><a href="https://github.com/HUSEYINTUNGA/Manga_Translator" target="_blank">GitHub Reposu</a></li>
+            </ul>
+        </section>
+    </footer>
+</body>
+</html>
