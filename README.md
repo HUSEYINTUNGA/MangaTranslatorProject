@@ -1,49 +1,49 @@
 # Manga Translator Project
 
 ## Projenin Amacı
-Manga Translator Project, manga ve çizgi roman görsellerindeki metinleri tespit edip çevirerek, kullanıcılara bu içerikleri istedikleri dillerde sunmayı amaçlayan bir uygulamadır. Proje, görüntü işleme, optik karakter tanıma (OCR) ve çeviri teknolojilerini birleştirerek bu işlemleri otomatize eder.
+Manga Translator Project, manga ve çizgi roman görsellerindeki metinleri tespit edip kullanıcının tercih ettiği bir dile çevirmeyi hedefleyen bir sistemdir. Bu proje, dil bariyerlerini aşıp manga deneyimini daha erişilebilir hale getirmek amacıyla geliştirilmiştir.
 
 ---
 
 ## Özellikler
 
 ### 1. Metin Tespiti
-Faster R-CNN modeli kullanılarak manga görsellerindeki metin kutuları tespit edilir. Bu aşamada:
-- Görsel giriş olarak alınır.
+Faster R-CNN modeli, görsellerdeki metin kutularını tespit etmek için kullanılmıştır. Bu aşamada:
+- Görsel normalize edilerek modele giriş olarak verilir.
 - Metin kutularının koordinatları belirlenir.
 
 ### 2. Optik Karakter Tanıma (OCR)
-Tespit edilen metin kutularındaki içerikler EasyOCR kütüphanesi kullanılarak okunur. Bu aşamada:
+EasyOCR kullanılarak tespit edilen metin kutularındaki içerikler dijital metne dönüştürülür. Bu aşamada:
 - Her bir metin kutusu kesilir (cropping).
-- Metin dijital formata dönüştürülür.
+- Dijital metin oluşturulur.
 
 ### 3. Çeviri
-OCR ile elde edilen metinler Google Translate API kullanılarak hedef dile çevrilir. Bu aşamada:
-- Metinlerin dili algılanır.
-- Kullanıcının seçtiği dile göre çeviri yapılır.
+Google Translate API ile metinler hedef dile çevrilir. Bu aşamada:
+- Dil algılama yapılır.
+- Kullanıcının seçtiği dile göre çeviri sağlanır.
 
 ### 4. Görsel İşleme
-Çevrilen metinler orijinal görselin üzerine eklenir. Bu aşamada:
+Çevrilen metinler, orijinal görselin üzerine yerleştirilir. Bu aşamada:
 - Tespit edilen kutular beyaz bir arka planla doldurulur.
-- Çevrilen metin kutulara yazılır.
+- Çevrilen metin uygun bir tasarımla kutulara yazılır.
 
 ---
 
 ## Model Eğitimi
 
 ### Veri Seti
-- Kaggle'dan alınan bir veri seti kullanıldı ([Manga Text Detection Dataset](https://www.kaggle.com/datasets/naufalahnaf17/manga-text-detection)).
-- Görseller "Hüseyin TUNGA" tarafından etiketlenmiştir.
-- Etiket formatı: COCO JSON.
-- Veri seti, manga görsellerindeki metin kutuları ve sınıf bilgilerini içerir.
+- Kaynak: Kaggle’dan sağlanan [Manga Text Detection Dataset](https://www.kaggle.com/datasets/naufalahnaf17/manga-text-detection).
+- Etiketleme: RoboFlow kullanılarak COCO formatında etiketleme yapıldı.
+- Toplam Görsel Sayısı: 494 (Eğitim: 349, Doğrulama: 100, Test: 45).
 
 ### Eğitim Süreci
 - **Model**: ResNet50 tabanlı Faster R-CNN.
-- **Model Özelleştirme**: ResNet50 özellik çıkarıcı olarak kullanıldı ve son katmanlar manga metin tespiti için ayarlandı.
-- **Hiperparametreler**: Öğrenme oranı ve momentum optimize edildi.
-- **Eğitim Metrikleri**:
-  - Doğruluk: %73
-  - F1 Skoru: %83
+- **Hiperparametreler**: Öğrenme oranı: 0.005, Momentum: 0.9, Epoch sayısı: 20.
+- **Performans Metrikleri**:
+  - Precision: 0.7649
+  - Recall: 0.9334
+  - F1 Skoru: 0.8338
+  - Doğruluk: 0.7358
 
 ---
 
@@ -58,10 +58,11 @@ OCR ile elde edilen metinler Google Translate API kullanılarak hedef dile çevr
 
 ### Sistem Mimarisi
 1. Kullanıcı bir görsel yükler ve çeviri dilini seçer.
-2. Django backend’i aşağıdaki işlemleri gerçekleştirir:
-   - Görseli Faster R-CNN modeli ile işler ve metin kutularını tespit eder.
-   - OCR ile metni okur ve çevirir.
-   - Çevrilen metni işlenmiş görsel üzerine yerleştirir.
+2. Django backend’i aşağıdaki adımları gerçekleştirir:
+   - Faster R-CNN modeli ile metin kutuları tespit edilir.
+   - OCR kullanılarak metin dijital formata dönüştürülür.
+   - Metinler Google Translate API ile çevrilir.
+   - Çevrilen metinler görsellere yerleştirilir.
 3. Kullanıcıya işlenmiş görsel sunulur.
 
 ---
@@ -81,7 +82,7 @@ OCR ile elde edilen metinler Google Translate API kullanılarak hedef dile çevr
    git clone https://github.com/HUSEYINTUNGA/manga-translator.git
    cd manga-translator
    ```
-2. Gerekli Python kütüphanelerini yükleyin:
+2. Gereksinimleri yükleyin:
    ```bash
    pip install -r requirements.txt
    ```
@@ -96,13 +97,25 @@ OCR ile elde edilen metinler Google Translate API kullanılarak hedef dile çevr
 
 ---
 
-## Geliştirici Notları
-- OCR ve Faster R-CNN modellerini optimize ederek çalışma hızı arttırılabilir.
-- Alternatif çeviri API'leri entegre edilerek çeviri kalitesi geliştirilebilir.
-- Kullanıcı dostu bir arayüz eklenebilir.
+## Performans Değerlendirme
+
+### Metrikler
+- **IoU (Intersection over Union)**: 0.7 eşik değeri ile bounding box tespiti.
+- **Precision**: 0.7649
+- **Recall**: 0.9334
+- **F1 Skoru**: 0.8338
+- **Accuracy**: 0.7358
+
+### Gözlemler
+- Model, karmaşık arka planlarda performans kaybı yaşayabilir.
+- Beyaz arka plan uygulaması, metinlerin daha okunaklı hale gelmesini sağlamıştır.
+- Google Translate API’nin çeviri kalitesi bağlam gerektiren metinlerde sınırlı kalabilir.
 
 ---
 
 ## Katkılar
 Katkı sağlamak için bir çekme isteği (pull request) oluşturun veya sorunları bildirin.
+
+---
+
 
