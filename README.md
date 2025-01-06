@@ -80,6 +80,25 @@ Google Translate API ile metinler hedef dile çevrilir. Bu aşamada:
 3. Kullanıcıya işlenmiş görsel sunulur.
 
 ---
+## Performans Değerlendirme
+
+### Metrikler
+
+- **IoU (Intersection over Union)**: 0.7 eşik değeri ile bounding box tespiti.
+- **Precision**: 0.7649
+- **Recall**: 0.9334
+- **F1 Skoru**: 0.8338
+- **Accuracy**: 0.7358
+
+### Gözlemler
+
+- Model, karmaşık arka planlarda performans kaybı yaşayabilir.
+- Beyaz arka plan uygulaması, metinlerin daha okunaklı hale gelmesini sağlamıştır.
+- Google Translate API’nin çeviri kalitesi bağlam gerektiren metinlerde sınırlı kalabilir.
+- Küçük fontlu veya el yazısı tarzındaki metinler, OCR tarafından doğru şekilde okunamamış ve bu durum çeviri sürecini olumsuz etkilemiştir.
+- Düşük kontrastlı görseller veya yoğun görsel gürültü içeren arka planlar, hem metin tespitinde hem de OCR işlemlerinde zorluklara neden olmuştur.
+
+---
 
 ## Kurulum ve Kullanım
 
@@ -111,26 +130,6 @@ Google Translate API ile metinler hedef dile çevrilir. Bu aşamada:
    python manage.py runserver
    ```
 2. Tarayıcınızda [http://localhost:8000](http://localhost:8000) adresine giderek uygulamayı kullanın.
-
----
-
-## Performans Değerlendirme
-
-### Metrikler
-
-- **IoU (Intersection over Union)**: 0.7 eşik değeri ile bounding box tespiti.
-- **Precision**: 0.7649
-- **Recall**: 0.9334
-- **F1 Skoru**: 0.8338
-- **Accuracy**: 0.7358
-
-### Gözlemler
-
-- Model, karmaşık arka planlarda performans kaybı yaşayabilir.
-- Beyaz arka plan uygulaması, metinlerin daha okunaklı hale gelmesini sağlamıştır.
-- Google Translate API’nin çeviri kalitesi bağlam gerektiren metinlerde sınırlı kalabilir.
-- Küçük fontlu veya el yazısı tarzındaki metinler, OCR tarafından doğru şekilde okunamamış ve bu durum çeviri sürecini olumsuz etkilemiştir.
-- Düşük kontrastlı görseller veya yoğun görsel gürültü içeren arka planlar, hem metin tespitinde hem de OCR işlemlerinde zorluklara neden olmuştur.
 
 ---
 
