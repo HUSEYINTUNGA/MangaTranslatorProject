@@ -129,6 +129,8 @@ Google Translate API ile metinler hedef dile çevrilir. Bu aşamada:
 - Model, karmaşık arka planlarda performans kaybı yaşayabilir.
 - Beyaz arka plan uygulaması, metinlerin daha okunaklı hale gelmesini sağlamıştır.
 - Google Translate API’nin çeviri kalitesi bağlam gerektiren metinlerde sınırlı kalabilir.
+- Küçük fontlu veya el yazısı tarzındaki metinler, OCR tarafından doğru şekilde okunamamış ve bu durum çeviri sürecini olumsuz etkilemiştir.
+- Düşük kontrastlı görseller veya yoğun görsel gürültü içeren arka planlar, hem metin tespitinde hem de OCR işlemlerinde zorluklara neden olmuştur.
 
 ---
 
@@ -137,3 +139,4 @@ Google Translate API ile metinler hedef dile çevrilir. Bu aşamada:
 Katkı sağlamak için bir çekme isteği (pull request) oluşturun veya sorunları bildirin.
 
 ---
+
