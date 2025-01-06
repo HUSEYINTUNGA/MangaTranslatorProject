@@ -1,56 +1,108 @@
-# Projenin Bölümleri
+# Manga Translator Project
 
-## 1. Metin Tespiti
-Faster R-CNN modeli kullanılarak manga görsellerindeki metin kutuları tespit edilir.
-Model, metinlerin konumlarını belirlemek için eğitilmiş bir sinir ağıdır. Bu aşamada:
-  -Görselin giriş olarak alınması,
-  -Metin kutularının koordinatlarının tespit edilmesi sağlanır.
+## Projenin Amacı
+Manga Translator Project, manga ve çizgi roman görsellerindeki metinleri tespit edip çevirerek, kullanıcılara bu içerikleri istedikleri dillerde sunmayı amaçlayan bir uygulamadır. Proje, görüntü işleme, optik karakter tanıma (OCR) ve çeviri teknolojilerini birleştirerek bu işlemleri otomatize eder.
 
-## 2. Optik Karakter Tanıma (OCR)
-Tespit edilen metin kutularındaki içerikler EasyOCR kütüphanesi kullanılarak okunur. OCR aşaması şu işlemleri içerir:
-  -Her bir metin kutusunun kesilmesi (cropping),
-  -İçeriğin dijital formata dönüştürülmesi.
+---
 
-## 3. Çeviri
-OCR ile elde edilen metinler Google Translate API kullanılarak hedef dile çevrilir. Çeviri aşamasında:
-  -Metinlerin dil algılaması yapılır,
-  -Kullanıcının seçtiği dile göre çeviri gerçekleştirilir.
+## Özellikler
 
-## 4. Görsel İşleme
-Çevrilen metinler orijinal görselin üzerine eklenir. Görsel işleme süreci şu işlemleri kapsar:
-  -Tespit edilen kutuların beyaz bir arka planla doldurulması,
-  -Çevrilen metnin kutulara yazdırılması.
+### 1. Metin Tespiti
+Faster R-CNN modeli kullanılarak manga görsellerindeki metin kutuları tespit edilir. Bu aşamada:
+- Görsel giriş olarak alınır.
+- Metin kutularının koordinatları belirlenir.
 
-# Model Eğitimi
+### 2. Optik Karakter Tanıma (OCR)
+Tespit edilen metin kutularındaki içerikler EasyOCR kütüphanesi kullanılarak okunur. Bu aşamada:
+- Her bir metin kutusu kesilir (cropping).
+- Metin dijital formata dönüştürülür.
 
-## Veri Seti
-Model, Kaggle'dan ([https://www.kaggle.com/datasets/naufalahnaf17/manga-text-detection]) adrsinden alınan görseller "Hüseyin TUNGA" tarafından etiketlenmiştir.
-Model, bu manga görselleri üzerinde eğitildi. Veri seti şu özelliklere sahiptir:
-  -Etiket Formatı: COCO JSON formatı,
-  -İçerik: Manga görsellerindeki metin kutuları ve sınıf bilgileri.
+### 3. Çeviri
+OCR ile elde edilen metinler Google Translate API kullanılarak hedef dile çevrilir. Bu aşamada:
+- Metinlerin dili algılanır.
+- Kullanıcının seçtiği dile göre çeviri yapılır.
 
-## Eğitim Süreci
-Model eğitimi için Faster R-CNN (ResNet50 tabanlı) kullanıldı. Eğitim aşamaları şunlardır:
-  -Model Özelleştirme: ResNet50 özellik çıkarıcı olarak kullanıldı ve son katmanlar manga metin tespiti için ayarlandı.
-  -Hiperparametreler: Öğrenme oranı, momentum gibi parametreler optimize edildi.
-  -Eğitim Metrikleri:
-    --Doğruluk: %73
-    --F1 Skoru: %83
+### 4. Görsel İşleme
+Çevrilen metinler orijinal görselin üzerine eklenir. Bu aşamada:
+- Tespit edilen kutular beyaz bir arka planla doldurulur.
+- Çevrilen metin kutulara yazılır.
 
-# Teknik Detaylar
+---
 
-## Kullanılan Teknolojiler
-  -Backend: Django
-  -Frontend: HTML, CSS
-  -Model: Faster R-CNN (PyTorch kullanılarak)
-  -OCR: EasyOCR
-  -Çeviri: Google Translate API
+## Model Eğitimi
 
-## Sistem Mimarisi
-  -Kullanıcı bir görsel yükler ve çeviri dilini seçer.
-  -Django backend’i şu işlemleri yürütür:
-    --Görseli Faster R-CNN modeli ile işler ve metin kutularını tespit eder.
-    --OCR ile metni okur ve çevirir.
-    --Çevrilen metni işlenmiş görsel üzerine yerleştirir.
-  -İşlenmiş görsel kullanıcıya sunulur.
+### Veri Seti
+- Kaggle'dan alınan bir veri seti kullanıldı ([Manga Text Detection Dataset](https://www.kaggle.com/datasets/naufalahnaf17/manga-text-detection)).
+- Görseller "Hüseyin TUNGA" tarafından etiketlenmiştir.
+- Etiket formatı: COCO JSON.
+- Veri seti, manga görsellerindeki metin kutuları ve sınıf bilgilerini içerir.
+
+### Eğitim Süreci
+- **Model**: ResNet50 tabanlı Faster R-CNN.
+- **Model Özelleştirme**: ResNet50 özellik çıkarıcı olarak kullanıldı ve son katmanlar manga metin tespiti için ayarlandı.
+- **Hiperparametreler**: Öğrenme oranı ve momentum optimize edildi.
+- **Eğitim Metrikleri**:
+  - Doğruluk: %73
+  - F1 Skoru: %83
+
+---
+
+## Teknik Detaylar
+
+### Kullanılan Teknolojiler
+- **Backend**: Django
+- **Frontend**: HTML, CSS
+- **Model**: Faster R-CNN (PyTorch)
+- **OCR**: EasyOCR
+- **Çeviri**: Google Translate API
+
+### Sistem Mimarisi
+1. Kullanıcı bir görsel yükler ve çeviri dilini seçer.
+2. Django backend’i aşağıdaki işlemleri gerçekleştirir:
+   - Görseli Faster R-CNN modeli ile işler ve metin kutularını tespit eder.
+   - OCR ile metni okur ve çevirir.
+   - Çevrilen metni işlenmiş görsel üzerine yerleştirir.
+3. Kullanıcıya işlenmiş görsel sunulur.
+
+---
+
+## Kurulum ve Kullanım
+
+### Gereksinimler
+- Python 3.8+
+- PyTorch
+- EasyOCR
+- Django
+- Google Translate API anahtarı
+
+### Kurulum
+1. Depoyu klonlayın:
+   ```bash
+   git clone https://github.com/HUSEYINTUNGA/manga-translator.git
+   cd manga-translator
+   ```
+2. Gerekli Python kütüphanelerini yükleyin:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Google Translate API anahtarını yapılandırın.
+
+### Çalıştırma
+1. Django sunucusunu başlatın:
+   ```bash
+   python manage.py runserver
+   ```
+2. Tarayıcınızda [http://localhost:8000](http://localhost:8000) adresine giderek uygulamayı kullanın.
+
+---
+
+## Geliştirici Notları
+- OCR ve Faster R-CNN modellerini optimize ederek çalışma hızı arttırılabilir.
+- Alternatif çeviri API'leri entegre edilerek çeviri kalitesi geliştirilebilir.
+- Kullanıcı dostu bir arayüz eklenebilir.
+
+---
+
+## Katkılar
+Katkı sağlamak için bir çekme isteği (pull request) oluşturun veya sorunları bildirin.
 
